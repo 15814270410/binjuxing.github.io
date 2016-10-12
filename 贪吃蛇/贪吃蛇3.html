@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#wrap{
+			width:780px;
+			height:780px;
+			border:5px solid black;
+			position:relative;
+			margin:auto;
+			background-image:url(bg.png);
+			overflow:hidden;
+		}
+		#wrap div{
+			position: absolute;
+			height:15px;
+			width:15px;
+			background:blue;
+			border-radius: 50% ;
+			background-size:15px 15px;
+		}
+		.xuan,.tishi{
+			font-size:20px;
+			width:126px;
+			position:absolute;
+			background:yellow;
+			top:150px;
+			left:50%;
+			margin-left:-63px;
+			text-align: center;
+		}
+		/*p{text-align: center;}*/
+		button,input{
+			width:125px;
+			background:skyblue;
+			font-size:30px;
+		}
+		.tishi{
+			display: none;
+			width:320px;
+			margin-left:-160px;
+		}
+		.fenshu{
+			width:500px;
+			position:absolute;
+			top:20px;
+			left:10px;
+		}
+
+	</style>
+</head>
+<body>
+<div id="wrap"></div>
+<div class="xuan">
+	<p>选择玩家数量</p>
+	<button>1</button>
+	<button>2</button>
+	<button>3</button>
+	<button>4</button>
+	<button>确定</button>
+</div>
+<div class="tishi">
+	<p>温馨提示：</p>
+	<p>玩家1：红色 控制 上下左右方向键</p>
+	<p>玩家2：绿色 控制 W S A D</p>
+	<p>玩家3：蓝色 控制 8 5 4 6</p>
+	<p>玩家4：橙色 控制 U J H K</p>
+	<input type="button" name="" value="开始">
+</div>
+<div class="fenshu">
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+</div>
+</body>
+<script type="text/javascript">
+	var wrap=document.getElementById("wrap");
+	var xuan=document.querySelector(".xuan");
+	var tishi=document.querySelector(".tishi")
+	var button=document.querySelectorAll("button");
+	var fen=document.querySelectorAll(".fenshu p");
+	var input=document.querySelector("input")
+	var shu=1;//蛇数量	 
+	var num= shu*5;
+	var user=[2,2,2,2];//蛇长度	
+	var vx=[1,1,1,1];	
+	var vy=[0,0,0,0];
+	var x=[1,3,5,7];
+	var y=[0,18,35,51];
+	var wW=wrap.clientWidth;
+	var wH=wrap.clientHeight;
+	var time=200;//速度
+	var arrIndex=0;
+	var fx=[];
+	var fy=[];
+	var zong=0;
+	var timer=null;
+	var jd=0;
+	for(var i=0;i<button.length;i++){
+		button[i].index=i;
+		button[i].onclick=function(){
+			if(this.index==4){
+				xuan.style.display="none";
+				tishi.style.display="block"
+				for(var i=0;i<shu;i++){
+					zong+=user[i]
+				}
+				shenum();
+			}else{
+				shu=this.index+1;
+				num= shu*5;
+				console.log(shu)
+			}
+		}
+	}
+	input.onclick=function(){		
+		kaishi();
+	}
+	function kaishi(){
+		tishi.style.display="none";
+		clearInterval(timer);		
+		dong();
+	}
+	function dong(){
+		timer=setInterval(function(){
+			shan=0;
+			for(var i=0;i<shu;i++){
+				if(i>0){
+						shan+=user[i-1]
+					}
+				if(user[i]){
+					var ting=false;
+					
+										
+					divL=document.querySelectorAll("#wrap div");
+					wrap=document.getElementById("wrap");
+					
+					wrap.insertBefore(wrap.children[shan],divL[shan+user[i]-1]);
+					for(var k=0;k<divL.length-1-shu*3;k++){
+						if(k<shan||k>=shan+user[i]){
+							if((x[i]*15==divL[k].offsetLeft&&y[i]*15==divL[k].offsetTop)||x[i]*15==divL[k].offsetLeft&&y[i]*15==divL[k].offsetTop){
+							ting=true;
+							}	
+						}						
+					}
+					var color=["red","green","blue","orange"]
+					divL[shan+user[i]-1].style.background="url(h1.png)";
+					if(vx[i]==1){jd=3;}else if(vx[i]==-1){jd=1;}
+					if(vy[i]==1){jd=0;}else if(vy[i]==-1){jd=2;}		
+					divL[shan+user[i]-1].style.transform="rotate("+jd*90+"deg)"			
+					divL[shan+user[i]-2].style.left=x[i]*15+"px";
+					divL[shan+user[i]-2].style.top=y[i]*15+"px";
+					x[i]+=vx[i];
+					y[i]+=vy[i];
+					divL[shan+user[i]-1].style.left=x[i]*15+"px";
+					divL[shan+user[i]-1].style.top=y[i]*15+"px";
+					divL=document.querySelectorAll("#wrap div");
+					for(var a=0;a<num*3;a++){
+						if(fx[a]==x[i]*15&&fy[a]==y[i]*15){
+						divL[zong+a].style.background=color[i];	
+						wrap.insertBefore(wrap.children[zong+a],wrap.children[shan+user[i]-2]);
+						arrIndex=a;
+						zong++;
+						food();
+						user[i]++;
+						}
+					}
+					
+
+				}
+				if(x[i]<0||y[i]<0||x[i]*15>wW-15||y[i]*15>wH-15||ting){
+						for(var j=shan;j<shan+user[i];j++){
+							wrap.children[shan].remove();
+						}						
+						zong-=user[i];
+						user[i]=0;
+						
+						if(shu==1){
+					clearInterval(timer);
+					alert("Game over!")	
+						}
+					
+				}
+				fen[i].innerHTML="玩家"+(i+1)+"长度:"+user[i];
+			}		
+		},time)
+	}
+	function shenum(){
+		for(var i=0;i<num;i++){
+			if(i>=shu*2){
+				food();
+				arrIndex++;				
+			}else{
+				var div=document.createElement("div");
+				if(i<2){
+				div.style.background="red";
+				div.style.top=0+"px";	
+				}else if(i<4){
+					div.style.top=18*15+"px";
+					div.style.background="green";
+				}
+				else if(i<6){
+					div.style.background="blue";
+					div.style.top=35*15+"px";
+				}
+				else if(i<8){
+					div.style.background="orange";
+					div.style.top=51*15+"px";
+				}
+			div.style.left=i*15+"px";
+			wrap.appendChild(div);	
+				}
+		}
+	}
+	// 食物生成及其的位置
+	function food(){		
+		var divL=document.querySelectorAll("#wrap div");
+		var div=document.createElement("div");
+		fx[arrIndex]=ranFn();
+		fy[arrIndex]=ranFn();
+		console.log(arrIndex)
+		for(var j=0;j<divL.length;j++){
+			if(fx[arrIndex]==divL[j].offsetLeft&&fy[arrIndex]==divL[j].offsetLeft){
+				fx[arrIndex]=ranFn();
+				fy[arrIndex]=ranFn();
+				j=0;
+			}
+		}
+		console.log(fx[0])
+		div.style.background="url(f1.png)";
+		div.style.left=fx[arrIndex]+"px"
+		div.style.top=fy[arrIndex]+"px"
+		wrap.insertBefore(div,wrap.children[zong+arrIndex]);
+	}
+	function ranFn(){
+		return Math.floor(Math.random()*52)*15
+	}
+	// 键盘事件 控制方向
+	window.onkeydown=function(e){
+		console.log(e.keyCode)
+		for(var i=0;i<shu;i++){
+			if(vx[i]==0){
+				if(e.keyCode==37&&i==0||i==1&&e.keyCode==65||(e.keyCode==52||e.keyCode==100)&&i==2||i==3&&e.keyCode==74){
+					vx[i]=-1;
+					vy[i]=0;
+				}
+				if(e.keyCode==39&&i==0||i==1&&e.keyCode==68||(e.keyCode==54||e.keyCode==102)&&i==2||i==3&&e.keyCode==76){
+					vx[i]=1;
+					vy[i]=0;
+				}		
+			}
+			if(vy[i]==0){
+				if(e.keyCode==38&&i==0||i==1&&e.keyCode==87||(e.keyCode==56||e.keyCode==104)&&i==2||i==3&&e.keyCode==73){
+					vx[i]=0;
+					vy[i]=-1;
+				}
+				if(e.keyCode==40&&i==0||i==1&&e.keyCode==83||(e.keyCode==53||e.keyCode==98)&&i==2||i==3&&e.keyCode==75){
+					vx[i]=0;
+					vy[i]=1;
+				}
+			}
+		}
+	}
+</script>
+</html>

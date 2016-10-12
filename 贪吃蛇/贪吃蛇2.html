@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#wrap{
+			width:780px;
+			height:780px;
+			border:5px solid black;
+			position:relative;
+			margin:auto;
+			background-image:url(bg.png);
+		}
+		#wrap div{
+			position: absolute;
+			height:15px;
+			width:15px;
+			background:blue;
+		}
+		.xuan{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+<div id="wrap"></div>
+<div class="xuan">
+	<p>选择玩家数量</p>
+	<button>1</button>
+	<button>2</button>
+	<button>3</button>
+	<button>4</button>
+	<button>开始</button>
+
+</div>
+</body>
+
+<script type="text/javascript">
+	var wrap=document.getElementById("wrap");
+	var xuan=document.querySelector(".xuan");
+	var button=document.querySelectorAll("button");
+
+	var shu=2;//蛇数量 
+	var num= shu*3;
+	var user=[2,2,2,2];//蛇长度
+	for(var i=0;i<num;i++){chan(i)}
+	var vx=[1,1,1,1];	
+	var vy=[0,0,0,0];
+	var x=[1,3,5,7];
+	var y=[0,18,35,51];
+	var wW=wrap.clientWidth;
+	var wH=wrap.clientHeight;
+	var time=200;//速度
+	var arrIndex=shu*2-1;
+	
+	var timer=setInterval(function(){
+		shan=0;
+		for(var i=0;i<shu;i++){
+			if(user[i]){
+				var ting=false;
+				x[i]+=vx[i];
+				y[i]+=vy[i];
+				divL=document.querySelectorAll("#wrap div");
+				wrap=document.getElementById("wrap");
+
+				if(i>0){
+					shan+=user[i-1]
+				}
+				
+				wrap.children[shan].remove();
+				var div=document.createElement("div");
+				divL=document.querySelectorAll("#wrap div");
+				wrap=document.getElementById("wrap");
+				wrap.insertBefore(div,wrap.children[shan+user[i]-1]);
+				divL=document.querySelectorAll("#wrap div");
+
+				for(var k=0;k<divL.length-2;k++){
+					if(k<shan||k>shan+user[i]){
+						if((x[i]*15==divL[k].offsetLeft&&y[i]*15==divL[k].offsetTop)||x[i]*15==divL[k].offsetLeft&&y[i]*15==divL[k].offsetTop){
+						ting=true;
+					}	
+					}
+					
+				}
+				var color=["red","green","blue","orange"]
+				divL[shan+user[i]-1].style.background=color[i];
+				divL[shan+user[i]-1].style.left=x[i]*15+"px";
+				divL[shan+user[i]-1].style.top=y[i]*15+"px";
+				for(var a=divL.length-shu;a<divL.length;a++){
+					if(fx[a]==x[i]*15&&fy[a]==y[i]*15){
+					wrap.insertBefore(wrap.children[a],wrap.children[shan+user[i]-1]);
+					arrIndex=a;
+					// wrap.children[divL.length-1].remove();
+
+					food();
+					user[i]++;
+				}
+				}
+				
+				}
+			if(x[i]<0||y[i]<0||x[i]*15>wW-15||y[i]*15>wH-15||ting){
+					for(var j=shan;j<shan+user[i];j++){
+						wrap.children[shan].remove();
+					}
+					user[i]=0;
+				// clearInterval(timer);
+				// alert("Game over!")
+				// return
+			}
+	}
+		
+	},time)
+	function chan(i){
+		
+		if(i>=shu*2){
+			// for(var j=0;j<num*3;j++){
+			food();
+			arrIndex++;	
+			// }
+			
+		}else{
+			var div=document.createElement("div");
+			if(i<=2){
+
+			div.style.top=0+"px";	
+			}else if(i<=4){
+				div.style.top=18*15+"px";
+			}
+			else if(i<=6){
+				div.style.top=35*15+"px";
+			}
+			else if(i<=8){
+				div.style.top=51*15+"px";
+			}
+		div.style.left=i*15+"px";
+		wrap.appendChild(div);	
+			}
+		
+	}
+	// 食物生成及其的位置
+	
+	function food(){
+		fx=[];
+		fy=[];
+		console.log(fx[0])
+		var divL=document.querySelectorAll("#wrap div");
+		var div=document.createElement("div");
+		fx[arrIndex]=ranFn();
+		fy[arrIndex]=ranFn();
+		for(var j=0;j<divL.length;j++){
+			if(fx[arrIndex]==divL[j].offsetLeft&&fy[arrIndex]==divL[j].offsetLeft){
+				fx[arrIndex]=ranFn();
+				fy[arrIndex]=ranFn();
+				j=0;
+			}
+		}
+		console.log(fx[0])
+		div.style.background="url(f1.png)"
+		div.style.left=fx[arrIndex]+"px"
+		div.style.top=fy[arrIndex]+"px"
+		console.log(fx[arrIndex])
+		wrap.insertBefore(div,wrap.children[arrIndex]);
+
+	}
+	function ranFn(){
+		return Math.floor(Math.random()*52)*15
+	}
+	// 键盘事件 控制方向
+	window.onkeydown=function(e){
+		console.log(e.keyCode)
+		for(var i=0;i<shu;i++){
+			if(vx[i]==0){
+				if(e.keyCode==37&&i==0||i==1&&e.keyCode==65||e.keyCode==52&&i==2||i==3&&e.keyCode==74){
+					vx[i]=-1;
+					vy[i]=0;
+				}
+				if(e.keyCode==39&&i==0||i==1&&e.keyCode==68||e.keyCode==54&&i==2||i==3&&e.keyCode==76){
+					vx[i]=1;
+					vy[i]=0;
+				}		
+			}
+			if(vy[i]==0){
+				if(e.keyCode==38&&i==0||i==1&&e.keyCode==83||e.keyCode==56&&i==2||i==3&&e.keyCode==73){
+					vx[i]=0;
+					vy[i]=-1;
+				}
+				if(e.keyCode==40&&i==0||i==1&&e.keyCode==87||e.keyCode==53&&i==2||i==3&&e.keyCode==75){
+					vx[i]=0;
+					vy[i]=1;
+				}
+			}
+		}
+	}
+
+		
+
+</script>
+</html>
