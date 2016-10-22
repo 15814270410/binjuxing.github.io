@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.jsq{
+			width:500px;
+			padding:20px 20px;
+			background:#80DEEA;
+			height:300px;
+		}
+		.jsq input{
+			font-size:2em;
+			width:80px;
+			margin:5px 5px;
+			background:white;
+		}
+		#screen{
+			width:473px;
+			height:42px;
+			margin-left:7px;
+			background:#DED8D7;
+			font-size:2.6em;
+			color:blue;
+			text-align: right;
+			overflow:auto;
+		}
+		.shuzi{
+			width:300px;
+			float:left;
+		}
+		.shuzi input:nth-child(10){
+			width:175px;
+		}
+		.fuhao{
+			width:200px;
+			float:left;
+		}
+		.fuhao input:nth-child(7){
+			width:175px;
+		}
+	</style>
+</head>
+<body>
+<div class="jsq">
+	<div id="screen"></div>
+	<div class="shuzi">
+		<input type="button" name="" value="7">
+		<input type="button" name="" value="8">
+		<input type="button" name="" value="9">
+		<input type="button" name="" value="4">
+		<input type="button" name="" value="5">
+		<input type="button" name="" value="6">
+		<input type="button" name="" value="1">
+		<input type="button" name="" value="2">
+		<input type="button" name="" value="3">
+		<input type="button" name="" value="0">
+		<input type="button" name="" value=".">
+	</div>
+	<div class="fuhao">
+		<input type="button" name="" value="←">
+		<input type="button" name="" value="AC">
+		<input type="button" name="" value="×">
+		<input type="button" name="" value="÷">
+		<input type="button" name="" value="+">
+		<input type="button" name="" value="-">
+		<input type="button" name="" value="=">
+		
+		
+	</div>
+
+<script type="text/javascript">
+	// 计算器
+	var arrshu=[];
+	var k=0;
+	var suan=1;
+	var deng=0;
+	var arrfu=[];
+	var shuzi=document.querySelectorAll(".shuzi input")
+	var xianshi=document.getElementById("screen");
+	// 初始显示
+	arrshu[k]="0";
+	xianshi.innerHTML=arrshu[k];
+	// 数字输入
+	for(var i=0;i<shuzi.length;i++){
+		shuzi[i].xu1=i;
+		shuzi[i].onclick=function(){
+			xianshi.style.fontSize="2.6em";
+			console.log(deng);
+			if(deng==1){
+				for(var i=0;i<=k;i++){	
+					arrshu[i]="";
+				}
+				jieguo="";
+				suan=0;
+				k=0;
+				deng=0;
+			}
+			console.log(deng);
+			console.log(k);
+			// 限制数值长度
+			if(arrshu[k].length<16){
+				// 清空初值，以便写入数值	
+				var xiaoshu=1;
+				if(arrshu[k]=="0"){
+					arrshu[k]="";
+				}
+				if(arrshu[0]=="-"){
+
+				}
+				var xu1=this.xu1;
+				// 小数点
+				if(xu1==10){
+					if(arrshu[k]==""){
+						arrshu[k]+="0.";
+					}else {
+						if(arrshu[k].indexOf(".")==-1){
+							arrshu[k]+=shuzi[xu1].value;	
+
+						}						
+					}					
+				}else{
+					// 数字输入
+					arrshu[k]+=shuzi[xu1].value;	
+				}
+				xianshi.innerHTML=arrshu[k];}
+			}
+		}
+	var fuhao=document.querySelectorAll(".fuhao input");
+	
+
+	for(var i=0;i<fuhao.length;i++){
+		fuhao[i].xu2=i;
+		var jieguo=0;
+		var arrshu2=0;
+		fuhao[i].onclick=function(){
+			
+			 xu2=this.xu2;
+			switch(xu2){
+				// 删除
+				case 0:
+				arrshu[k]+="";
+				arrshu[k]=arrshu[k].substring(0,arrshu[k].length-1);
+				if(arrshu[k].length==0){
+					arrshu[k]="0";
+				}
+				xianshi.innerHTML=arrshu[k];
+				break;
+				// 清零
+				case 1:
+				arrshu[k]="0";
+				k=0;
+				deng=0;
+				jieguo=0;
+				suan=0;
+				xianshi.innerHTML=jieguo;
+				// 乘
+				break;
+				case 2:			
+				jisuan1();
+				deng=0;
+				k++;
+				suan=1;				
+				break;
+				// 除
+				case 3:
+				jisuan1();
+				suan=2;
+				deng=0;
+				k++;
+				break;
+				// 加
+				case 4:				
+				jisuan1();
+				suan=3;
+				deng=0;
+				k++;
+				break;
+				// 减
+				case 5:
+				if(arrshu[0]=="0"){
+					arrshu[0]="-";
+					xianshi.innerHTML=arrshu[0];
+				}else{
+				jisuan1();
+				deng=0;
+				suan=4;
+				k++;	
+				}
+				
+				break;
+				// 等于
+				case 6:
+				jisuan1();
+				if(suan!=0&&deng==0&&arrshu[k]=="0"){
+					arrshu[k]=jieguo;
+					jisuan2()
+
+				}			
+				deng=1;
+				break;
+			} 
+
+			if(((xu2!=0)&&(xu2!=6))&&(arrshu[0]!="-")){
+				arrshu[k]="0";
+			}
+			
+		}	
+	}
+	function jisuan1(){
+				arrshu[k]=Number(arrshu[k]);
+				if(k==0){
+					jieguo=arrshu[0];
+				}
+				// console.log(k);
+				jieguo=Number(jieguo);
+				if(((xu2==6||deng==0)&&k>0)&&arrshu[k]!="0"){
+					jisuan2();
+				}	
+			}
+	function jisuan2(){
+		// 小数计算	
+		var leng=0;
+		var leng1=0;
+		var leng2=0;
+		jieguo+="";
+		arrshu[k]+="";
+		if(jieguo.toString().split(".").length>1){
+			leng1=jieguo.toString().split(".")[1].length;
+		}
+		if(leng2=arrshu[k].toString().split(".").length>1){
+			leng2=arrshu[k].toString().split(".")[1].length;
+		}
+		
+		leng1>leng2?leng=leng1:leng=leng2;
+		jieguo*=Math.pow(10,leng);
+		arrshu[k]*=Math.pow(10,leng);
+		// alert(leng);
+		switch(suan){
+			case 1:jieguo*=arrshu[k];
+			jieguo/=Math.pow(10,leng)*Math.pow(10,leng);
+			break;
+			case 2:jieguo/=arrshu[k];
+			break;
+			case 3:jieguo+=arrshu[k];
+			jieguo/=Math.pow(10,leng);
+			break;
+			case 4:jieguo-=arrshu[k];
+			jieguo/=Math.pow(10,leng);
+			break;
+			}
+		// 恢复原值 否则影响连等！！
+		arrshu[k]/=Math.pow(10,leng);
+
+		if((jieguo+"").length>20){
+			xianshi.style.fontSize="38px";
+		}else if((jieguo+"").length>22){
+			xianshi.style.fontSize="30px";
+		}else{
+			xianshi.style.fontSize="2.6em";
+		}
+		xianshi.innerHTML=jieguo;
+
+	}
+</script>
+
+</body>
+</html>
