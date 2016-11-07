@@ -21,13 +21,26 @@
     <a href="贪吃蛇/贪吃蛇3.html">贪吃蛇</a><br>
       <a href="计算器.html">计算器</a><br>
       <a href="打飞机(普通版).html">微信打飞机</a>
+      <div ></div>
       <footer class="site-footer">
 
         <span>Jayson Bin</span>
       </footer>
 
     </section>
-
+<script>
+    var div=document.querySelector("div");
+  var i=0;
+  function run(){
+    div.innerHTML=i;
+    i++
+    if(i>=100){
+      i=0;
+    }
+    requestAnimationFrame(run);
+  }
+  
+    </script>
   
   </body>
 </html>
