@@ -526,6 +526,17 @@
 	// 运行
 	var id=[];		
 	function run(){
+	if(!window.cancelAnimationFrame){
+		window.cancelAnimationFrame=function(id){
+			clearTimeout(id);
+		}
+	}
+	window.requestAnimationFrame=(function(){
+		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
+			alert("2");
+			return setTimeout(fn,1000/60);
+		}
+	})()
 		if(bombom){
 			bomm(djm)
 			bomm(djz)
@@ -591,16 +602,6 @@
 			return}	
 		id=requestAnimationFrame(run);	
 	}
-	if(!window.cancelAnimationFrame){
-		window.cancelAnimationFrame=function(id){
-			clearTimeout(id);
-		}
-	}
-	window.requestAnimationFrame=(function(){
-		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
-			alert("2");
-			return setTimeout(fn,1000/60);
-		}
-	})()	
+	
 </script>
 </html>
