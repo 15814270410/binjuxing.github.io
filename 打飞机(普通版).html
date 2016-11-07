@@ -539,17 +539,17 @@
 				}
 			}
 		}
-	// 	vv++;
-	// 	if(vv>=1){//每刷新n次后 执行
-	// 		if(yunxing){
-	// 			bt+=vs;//背景移动
-	// 		}			
-	// 		if(bt>=568){bt=0}
+		vv++;
+		if(vv>=1){//每刷新n次后 执行
+			if(yunxing){
+				bt+=vs;//背景移动
+			}			
+			if(bt>=568){bt=0}
 	// 		flyBj()//飞行边界
 	// 		// 清空画板
-	// 		ctx.clearRect(0,0,320,568);	
+			ctx.clearRect(0,0,320,568);	
 	// 		// 绘制
-	// 		bg();//背景
+			bg();//背景
 	// 		dj(ctx,djb)//大型敌机
 	// 		dj(ctx,djz)//中型敌机
 	// 		dj(ctx,djm);//小型敌机
@@ -578,7 +578,7 @@
 	// 		}else if(flyFen[wjs]>250000){
 	// 			nandu3();
 	// 		}
-	// 	}
+		}
 		if(zanting){
 			yunxing=false;
 			ks.style.display="block";
@@ -590,7 +590,7 @@
 			}
 			alert("停")
 			return}
-		alert("jdj");
+		
 		id=requestAnimationFrame(run);	
 	}
 	
