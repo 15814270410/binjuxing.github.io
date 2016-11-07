@@ -598,6 +598,7 @@
 	}
 	window.requestAnimationFrame=(function(){
 		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
+			alert("2");
 			return setTimeout(fn,1000/60);
 		}
 	})()	
