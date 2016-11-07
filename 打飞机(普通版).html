@@ -153,6 +153,7 @@
 	var tuIndex=0;
 	var bt=0;
 	var vv=0;
+	var vvs=1;
 	var zanting=false;
 	var ff=0;
 
@@ -163,7 +164,7 @@
 		// 图片加载
 		img.onload = function(){
 			tuIndex++;
-			if(tuIndex==arrImg.length-1){
+			if(tuIndex>=arrImg.length){
 				ks.style.display="block";
 				ks.style.left=sWidth/2-ks.offsetWidth/2+"px";	
 			}
@@ -435,7 +436,7 @@
 		 xs=[15,8,3];
 		 xue=[6,12,28];
 		 vy=[1,2.5,1,1.5,0.5,1];
-		 cp=[40,80,100,200,300,500];
+		 cp=[40,80,100,200,350,500];
 		 nandu=1;
 	}
 	function nandu2(){
@@ -444,7 +445,7 @@
 		xs=[20,13,5];
 		xue=[8,18,36];
 		vy=[3,4,2,3,1,2];
-		cp=[5,10,60,80,150,250]
+		cp=[8,15,65,100,250,350]
 		nandu=2;
 	}
 	function nandu3(){
@@ -580,7 +581,7 @@
 			}
 		}
 		vv++;
-		if(vv==1){//每刷新n次后 执行
+		if(vv>=vvs){//每刷新n次后 执行
 			if(yunxing){
 				bt+=vs;//背景移动
 			}			
@@ -639,7 +640,8 @@
 	}
 	window.requestAnimationFrame=(function(){
 		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
-			//return setTimeout(fn,1000/60);
+			vvs=0;
+			return setTimeout(fn,1000/60);
 		}
 	})()	
 </script>
