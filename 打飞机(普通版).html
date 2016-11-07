@@ -207,9 +207,7 @@
 	function fjB(){
 		fj={tu:8,l:110,t:480,w:66,h:80,b:false,hp:10,hps:10}
 	}
-	
 	// 飞机
-
 	function feiji(ctx){
 		ctx.beginPath();
 		ctx.drawImage(arrImg[fj.tu],0,0,fj.w,fj.h,fj.l,fj.t,fj.w,fj.h);
@@ -441,14 +439,19 @@
 		 nandu=1;
 	}
 	function nandu2(){
-		console.log(vs)
 		vs=2;
 		zdv=8;
-		xs=[20,13,4];
+		xs=[20,13,5];
 		xue=[8,18,36];
 		vy=[3,4,2,3,1,2];
 		cp=[5,10,60,80,150,250]
 		nandu=2;
+	}
+	function nandu3(){
+		vs=3;
+		zdv=10;
+		vy=[4,5,3,4,1.5,2]
+		nandu=3;
 	}
 	// s 飞机数 xs 最大生成 d飞机下标 p 敌机出现频率 b 限制敌机总数 x 出现在屏幕的敌机数量； c 敌机参数 tu 显示图片下限 ts 显示图片上限 xue 血量 fen分数加 
 	// djB();
@@ -501,13 +504,11 @@
 						if(dj==djm){//若是小型敌机，则炸毁
 							dj.c[i].b=true;
 						}
-
 					}
 					if(fj.hp<=0){//血量为0，飞机爆炸
 						fj.hp=0;
 						fj.b=true;
-					}
-					
+					}	
 				}
 				// 敌机是否被摧毁
 				if(dj.c[i].b){	
@@ -612,8 +613,10 @@
 			zha();//炸弹
 			vv=0;
 			fen.innerHTML="分数:"+flyFen[wjs];
-			if(nandu<2&&flyFen[wjs]>=50000){
+			if(nandu<2&&flyFen[wjs]>=80000){
 				nandu2();
+			}else if(flyFen[wjs]>250000){
+				nandu3();
 			}
 		}
 		if(zanting){
@@ -628,6 +631,16 @@
 			
 			return}	
 		id=requestAnimationFrame(run);	
-	}	
+	}
+	if(!window.cancelAnimationFrame){
+		window.cancelAnimationFrame=function(id){
+			clearTimeout(id);
+		}
+	}
+	window.requestAnimationFrame=(function(){
+		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
+			return setTimeout(fn,1000/60);
+		}
+	})()	
 </script>
 </html>
