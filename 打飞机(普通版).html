@@ -165,16 +165,18 @@
 			tuIndex++;
 			if(tuIndex==arrImg.length-1){
 				ks.style.display="block";
-				ks.style.left=sWidth/2-ks.offsetWidth/2+"px";
-				
+				ks.style.left=sWidth/2-ks.offsetWidth/2+"px";	
 			}
-			if(tuIndex==5){
+			if(tuIndex>=2){
+				ctx.clearRect(0,0,sWidth,sHeight);
 				bg();
 				wx();
-				
+				jindu();
 			}
+
 		}
 	}
+
 	// 背景
 	function bg(){
 		ctx.beginPath();
@@ -187,6 +189,17 @@
 	function wx(){
 		ctx.beginPath();
 		ctx.drawImage(arrImg[1],0,0,310,300);
+		ctx.closePath();
+	}
+	// 进度；
+	function jindu(){
+		ctx.beginPath();
+		ctx.fillStyle="#403e3e";
+		ctx.fillRect(101,300,tuIndex/arrImg.length*100,20);
+		ctx.strokeStyle="#949494";
+		ctx.strokeRect(100,300,100,20);
+		ctx.fillStyle="#4c74e4";
+		ctx.fillText(Math.round(tuIndex/arrImg.length*10000)/100+"%",140,315)
 		ctx.closePath();
 	}
 	// 飞机参数
