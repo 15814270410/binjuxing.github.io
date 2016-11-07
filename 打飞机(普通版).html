@@ -525,7 +525,7 @@
 	}
 	// 运行
 	var id=[];		
-	 function run(){
+	function run(){
 	// 	if(bombom){
 	// 		bomm(djm)
 	// 		bomm(djz)
@@ -579,18 +579,18 @@
 	// 			nandu3();
 	// 		}
 	// 	}
-	// 	if(zanting){
-	// 		yunxing=false;
-	// 		ks.style.display="block";
-	// 		if(fj.hp<=0){
-	// 			ks.innerHTML="重新开始";
-	// 			cancelAnimationFrame(id);
-	// 		}else{
-	// 			ks.innerHTML="继续游戏"
-	// 		}
-	// 		alert("停")
-	// 		return}
-		alert("jdj")
+		if(zanting){
+			yunxing=false;
+			ks.style.display="block";
+			if(fj.hp<=0){
+				ks.innerHTML="重新开始";
+				cancelAnimationFrame(id);
+			}else{
+				ks.innerHTML="继续游戏"
+			}
+			alert("停")
+			return}
+		alert("jdj");
 		id=requestAnimationFrame(run);	
 	}
 	
