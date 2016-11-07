@@ -247,8 +247,8 @@
 						if(!dj.c[dj.x[j]].b&&zd[i].l>(dj.c[dj.x[j]].l-zd[i].w)&&zd[i].l<(dj.c[dj.x[j]].l+dj.c[dj.x[j]].w)&&zd[i].t>(dj.c[dj.x[j]].t-zd[i].h)&&zd[i].t<(dj.c[dj.x[j]].t+dj.c[dj.x[j]].h*0.7)){
 							zd[i].l=-100;//子弹消耗
 							if(zdzq){//打中减血
-								dj.c[j].xue-=2;
-								flyFen[wjs]+=dj.fen*2;
+								dj.c[j].xue-=3;
+								flyFen[wjs]+=dj.fen*3;
 							}else{
 								dj.c[j].xue--;
 								flyFen[wjs]+=dj.fen;
@@ -588,7 +588,6 @@
 			}else{
 				ks.innerHTML="继续游戏"
 			}
-			alert("停")
 			return}
 		
 		id=requestAnimationFrame(run);	
