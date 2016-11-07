@@ -526,21 +526,21 @@
 	// 运行
 	var id=[];		
 	function run(){
-	// 	if(bombom){
-	// 		bomm(djm)
-	// 		bomm(djz)
-	// 		bomm(djb)
-	// 		bombom=false;
-	// 	}
-	// 	function bomm(dj){
-	// 		for(var j=0;j<=dj.x.length-1;j++){
-	// 			if(!dj.c[dj.x[j]].b&&dj.c[dj.x[j]].t>-200&&dj.c[dj.x[j]].t<580){
-	// 				dj.c[dj.x[j]].b=true;
-	// 			}
-	// 		}
-	// 	}
+		if(bombom){
+			bomm(djm)
+			bomm(djz)
+			bomm(djb)
+			bombom=false;
+		}
+		function bomm(dj){
+			for(var j=0;j<=dj.x.length-1;j++){
+				if(!dj.c[dj.x[j]].b&&dj.c[dj.x[j]].t>-200&&dj.c[dj.x[j]].t<580){
+					dj.c[dj.x[j]].b=true;
+				}
+			}
+		}
 	// 	vv++;
-	// 	if(vv==1){//每刷新n次后 执行
+	// 	if(vv>=1){//每刷新n次后 执行
 	// 		if(yunxing){
 	// 			bt+=vs;//背景移动
 	// 		}			
