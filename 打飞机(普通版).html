@@ -545,17 +545,17 @@
 				bt+=vs;//背景移动
 			}			
 			if(bt>=568){bt=0}
-	// 		flyBj()//飞行边界
-	// 		// 清空画板
+			flyBj()//飞行边界
+			// 清空画板
 			ctx.clearRect(0,0,320,568);	
-	// 		// 绘制
+			// 绘制
 			bg();//背景
 	// 		dj(ctx,djb)//大型敌机
 	// 		dj(ctx,djz)//中型敌机
 	// 		dj(ctx,djm);//小型敌机
 	// 		// 道具
 	// 		daojus();
-	// 		feiji(ctx);//我方飞机
+			feiji(ctx);//我方飞机
 	// 		// 子弹增强的有效时间
 	// 		if(zdz){
 	// 			zzdd[0]--;
@@ -563,7 +563,7 @@
 	// 				zdzq();
 	// 			}
 	// 		}
-	// 		zidan(ctx);//子弹
+			zidan(ctx);//子弹
 	// 		//hp 血量条
 	// 		ctx.beginPath();
 	// 		ctx.fillRect(191,5,fj.hp*10,10);
