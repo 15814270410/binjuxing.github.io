@@ -525,71 +525,71 @@
 	}
 	// 运行
 	var id=[];		
-	function run(){
-		if(bombom){
-			bomm(djm)
-			bomm(djz)
-			bomm(djb)
-			bombom=false;
-		}
-		function bomm(dj){
-			for(var j=0;j<=dj.x.length-1;j++){
-				if(!dj.c[dj.x[j]].b&&dj.c[dj.x[j]].t>-200&&dj.c[dj.x[j]].t<580){
-					dj.c[dj.x[j]].b=true;
-				}
-			}
-		}
-		vv++;
-		if(vv==1){//每刷新n次后 执行
-			if(yunxing){
-				bt+=vs;//背景移动
-			}			
-			if(bt>=568){bt=0}
-			flyBj()//飞行边界
-			// 清空画板
-			ctx.clearRect(0,0,320,568);	
-			// 绘制
-			bg();//背景
-			dj(ctx,djb)//大型敌机
-			dj(ctx,djz)//中型敌机
-			dj(ctx,djm);//小型敌机
-			// 道具
-			daojus();
-			feiji(ctx);//我方飞机
-			// 子弹增强的有效时间
-			if(zdz){
-				zzdd[0]--;
-				if(zzdd[0]<=0){
-					zdzq();
-				}
-			}
-			zidan(ctx);//子弹
-			//hp 血量条
-			ctx.beginPath();
-			ctx.fillRect(191,5,fj.hp*10,10);
-			ctx.strokeStyle="#949494";
-			ctx.strokeRect(190,5,100,10);
-			ctx.closePath();
-			zha();//炸弹
-			vv=0;
-			fen.innerHTML="分数:"+flyFen[wjs];
-			if(nandu<2&&flyFen[wjs]>=80000){
-				nandu2();
-			}else if(flyFen[wjs]>250000){
-				nandu3();
-			}
-		}
-		if(zanting){
-			yunxing=false;
-			ks.style.display="block";
-			if(fj.hp<=0){
-				ks.innerHTML="重新开始";
-				cancelAnimationFrame(id);
-			}else{
-				ks.innerHTML="继续游戏"
-			}
-			alert("停")
-			return}
+	// function run(){
+	// 	if(bombom){
+	// 		bomm(djm)
+	// 		bomm(djz)
+	// 		bomm(djb)
+	// 		bombom=false;
+	// 	}
+	// 	function bomm(dj){
+	// 		for(var j=0;j<=dj.x.length-1;j++){
+	// 			if(!dj.c[dj.x[j]].b&&dj.c[dj.x[j]].t>-200&&dj.c[dj.x[j]].t<580){
+	// 				dj.c[dj.x[j]].b=true;
+	// 			}
+	// 		}
+	// 	}
+	// 	vv++;
+	// 	if(vv==1){//每刷新n次后 执行
+	// 		if(yunxing){
+	// 			bt+=vs;//背景移动
+	// 		}			
+	// 		if(bt>=568){bt=0}
+	// 		flyBj()//飞行边界
+	// 		// 清空画板
+	// 		ctx.clearRect(0,0,320,568);	
+	// 		// 绘制
+	// 		bg();//背景
+	// 		dj(ctx,djb)//大型敌机
+	// 		dj(ctx,djz)//中型敌机
+	// 		dj(ctx,djm);//小型敌机
+	// 		// 道具
+	// 		daojus();
+	// 		feiji(ctx);//我方飞机
+	// 		// 子弹增强的有效时间
+	// 		if(zdz){
+	// 			zzdd[0]--;
+	// 			if(zzdd[0]<=0){
+	// 				zdzq();
+	// 			}
+	// 		}
+	// 		zidan(ctx);//子弹
+	// 		//hp 血量条
+	// 		ctx.beginPath();
+	// 		ctx.fillRect(191,5,fj.hp*10,10);
+	// 		ctx.strokeStyle="#949494";
+	// 		ctx.strokeRect(190,5,100,10);
+	// 		ctx.closePath();
+	// 		zha();//炸弹
+	// 		vv=0;
+	// 		fen.innerHTML="分数:"+flyFen[wjs];
+	// 		if(nandu<2&&flyFen[wjs]>=80000){
+	// 			nandu2();
+	// 		}else if(flyFen[wjs]>250000){
+	// 			nandu3();
+	// 		}
+	// 	}
+	// 	if(zanting){
+	// 		yunxing=false;
+	// 		ks.style.display="block";
+	// 		if(fj.hp<=0){
+	// 			ks.innerHTML="重新开始";
+	// 			cancelAnimationFrame(id);
+	// 		}else{
+	// 			ks.innerHTML="继续游戏"
+	// 		}
+	// 		alert("停")
+	// 		return}
 		alert("jdj")
 		id=requestAnimationFrame(run);	
 	}
