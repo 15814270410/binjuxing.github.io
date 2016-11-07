@@ -235,33 +235,33 @@
 	function zidan(ctx){		
 		for(var i=0;i<=length;i++){
 			// 子弹是否打中敌机
-			dazhong(i,djm);
-			dazhong(i,djz);
-			dazhong(i,djb);
-			function dazhong(i,dj){
-				// 屏幕上显示的子弹
-				if(zd[i].t>0&&zd[i].l>0){
-					// 屏幕上的敌机
-					for(var j=0;j<=dj.x.length-1;j++){
-						// 打中条件
-						if(!dj.c[dj.x[j]].b&&zd[i].l>(dj.c[dj.x[j]].l-zd[i].w)&&zd[i].l<(dj.c[dj.x[j]].l+dj.c[dj.x[j]].w)&&zd[i].t>(dj.c[dj.x[j]].t-zd[i].h)&&zd[i].t<(dj.c[dj.x[j]].t+dj.c[dj.x[j]].h*0.7)){
-							zd[i].l=-100;//子弹消耗
-							if(zdzq){//打中减血
-								dj.c[j].xue-=2;
-								flyFen[wjs]+=dj.fen*2;
-							}else{
-								dj.c[j].xue--;
-								flyFen[wjs]+=dj.fen;
-							}
-							if(dj.c[j].xue<=0){
-								dj.c[dj.x[j]].b=true;//炸毁
-								dj.c[j].xue=dj.xue;//重置血量
-							}
-							break;
-						}	
-					}
-				}
-			}	
+			// dazhong(i,djm);
+			// dazhong(i,djz);
+			// dazhong(i,djb);
+			// function dazhong(i,dj){
+			// 	// 屏幕上显示的子弹
+			// 	if(zd[i].t>0&&zd[i].l>0){
+			// 		// 屏幕上的敌机
+			// 		for(var j=0;j<=dj.x.length-1;j++){
+			// 			// 打中条件
+			// 			if(!dj.c[dj.x[j]].b&&zd[i].l>(dj.c[dj.x[j]].l-zd[i].w)&&zd[i].l<(dj.c[dj.x[j]].l+dj.c[dj.x[j]].w)&&zd[i].t>(dj.c[dj.x[j]].t-zd[i].h)&&zd[i].t<(dj.c[dj.x[j]].t+dj.c[dj.x[j]].h*0.7)){
+			// 				zd[i].l=-100;//子弹消耗
+			// 				if(zdzq){//打中减血
+			// 					dj.c[j].xue-=2;
+			// 					flyFen[wjs]+=dj.fen*2;
+			// 				}else{
+			// 					dj.c[j].xue--;
+			// 					flyFen[wjs]+=dj.fen;
+			// 				}
+			// 				if(dj.c[j].xue<=0){
+			// 					dj.c[dj.x[j]].b=true;//炸毁
+			// 					dj.c[j].xue=dj.xue;//重置血量
+			// 				}
+			// 				break;
+			// 			}	
+			// 		}
+			// 	}
+			// }	
 			ctx.beginPath();
 			ctx.drawImage(arrImg[zd[i].tu],0,0,zd[i].w,zd[i].h,zd[i].l,zd[i].t,zd[i].w,zd[i].h);
 			ctx.closePath();
@@ -563,7 +563,7 @@
 	// 				zdzq();
 	// 			}
 	// 		}
-	//		zidan(ctx);//子弹
+			zidan(ctx);//子弹
 	// 		//hp 血量条
 	// 		ctx.beginPath();
 	// 		ctx.fillRect(191,5,fj.hp*10,10);
