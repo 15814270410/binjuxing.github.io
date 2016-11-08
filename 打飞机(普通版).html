@@ -592,6 +592,17 @@
 		
 		id=requestAnimationFrame(run);	
 	}
-	
+	if(!window.cancelAnimationFrame){
+		window.cancelAnimationFrame=function(id){
+			clearTimeout(id);
+		}
+	}
+	window.requestAnimationFrame=(function(){
+		return window.requestAnimationFrame||window.webkitRequestAnimationFrame||mozRequestAnimationFrame||msRequestAnimationFrame||oRequestAnimationFrame||function(fn){
+
+			return setTimeout(fn,1000/80);
+
+		}
+	})()
 </script>
 </html>
