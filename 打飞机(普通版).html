@@ -479,7 +479,9 @@
 				if(dj.c[i].l>(fj.l-dj.c[i].w)&&dj.c[i].l<(fj.l+fj.w)&&dj.c[i].t>(fj.t-dj.c[i].h)&&dj.c[i].t<(fj.t+fj.h)){
 					fj.hps--;
 					if(fj.hps<=0){
-						navigator.vibrate(1000);
+						if (navigator.vibrate) {
+							navigator.vibrate(1000);
+      						}
 						fj.hp--;
 						fj.hps=20;//刷新20次，血量减少1
 						if(dj==djm){//若是小型敌机，则炸毁
@@ -544,6 +546,9 @@
 	var id=[];		
 	function run(){
 		if(bombom){
+			if (navigator.vibrate) {
+				navigator.vibrate(1000);
+      			}
 			bomm(djm)
 			bomm(djz)
 			bomm(djb)
