@@ -28,7 +28,6 @@
 			bottom:10%;
 			color:#949494;
 			font-size: 2em;
-			/*left:50%;*/
 			display: none;
 		}
 		.fen{
@@ -55,6 +54,8 @@
 	var yunxing=false;
 	var c2=document.createElement("canvas");
 	var ctx2=c2.getContext("2d");
+
+	var touchbol = false;
 	kg();
 	function kg(){
 		sWidth=canvas.offsetWidth;
@@ -120,23 +121,37 @@
 			}
 		}
 		// 判断是否在飞机上
-		if(fj.w&&dx>(fj.l)&&dx<(fj.l+fj.w)&&dy>(fj.t)&&(dy<fj.t+fj.h)){
+		// if(fj.w&&dx>(fj.l)&&dx<(fj.l+fj.w)&&dy>(fj.t)&&(dy<fj.t+fj.h)){
 			dx-=fj.l;
 			dy-=fj.t;
+			touchbol = true;
 			// 添加绑定，手指滑动
-			canvas.addEventListener("touchmove",fly,false);		
-		}
+			// canvas.addEventListener("touchmove",fly,false);		
+		// }
 		e.preventDefault(); 
 		return false
 	})
+	canvas.addEventListener("touchmove",fly,false);	
 	// 手指滑动，控制飞机
 	function fly(e){
+		if (!touchbol) {return}
 		fj.l=e.touches[0].clientX*wb-dx;
 		fj.t=e.touches[0].clientY*hb-dy;	
 	}
-	canvas.addEventListener("touchend",function(){
-		// 移出手指滑动的绑定
-		canvas.removeEventListener("touchmove",fly,false);
+	canvas.addEventListener("touchend",function(e){
+		// touchbol = false;
+		// // 移除手指滑动的绑定
+		// if(e.touches[1]){
+		// 		dx2=e.touches[1].clientX*wb;
+		// 		dy2=e.touches[1].clientY*hb;
+		// }else{
+		// 	// canvas.removeEventListener("touchmove",fly,false);
+		// 	}
+		// if(zNum>0){
+			//炸弹 5,525,42,36
+			// if(e.touches[1]&&dx2>=5&&dx2<=47&&dy2>525&&dy2<=561){
+			// }else{canvas.removeEventListener("touchmove",fly,false);}
+		// }
 	})
 	var arcImg=["background_2.png","1.png","loading0.png","loading1.png","loading2.png","loading3.png","loading01.png","loading02.png","hero_fly_1.png","hero_fly_2.png","hero_blowup_1.png","hero_blowup_2.png","hero_blowup_3.png","hero_blowup_4.png","bullet1.png","bullet2.png","bomb.png","enemy4_fly_1.png","enemy5_fly_1.png","enemy1_fly_1.png","enemy1_blowup_1.png","enemy1_blowup_2.png","enemy1_blowup_3.png","enemy1_blowup_4.png","enemy3_fly_1.png","enemy3_hit_1.png","enemy3_blowup_1.png","enemy3_blowup_2.png","enemy3_blowup_3.png","enemy3_blowup_4.png","enemy2_fly_1.png","enemy2_fly_2.png","enemy2_hit_1.png","enemy2_blowup_1.png","enemy2_blowup_2.png","enemy2_blowup_3.png","enemy2_blowup_4.png","enemy2_blowup_5.png","enemy2_blowup_6.png","enemy2_blowup_7.png","enemy5_fly_x.png"];//0背景，1，微信 8~13控制的飞机，14 15 子弹，16 炸弹 17炸弹道具，18子弹道具 19~23小型敌机 24~29中型敌机 30~39 大型飞机 40回血
 	var arrImg=[];
@@ -204,7 +219,8 @@
 				bombom=true;
 				if(fj.tu>13){					
 					zanting=true;
-					fj.tu=8
+					fj.tu=8;
+					navigator.vibrate(1000);
 				}
 			}else{
 				fj.tu=fj.tu==8?9:8;	
@@ -463,6 +479,7 @@
 				if(dj.c[i].l>(fj.l-dj.c[i].w)&&dj.c[i].l<(fj.l+fj.w)&&dj.c[i].t>(fj.t-dj.c[i].h)&&dj.c[i].t<(fj.t+fj.h)){
 					fj.hps--;
 					if(fj.hps<=0){
+						navigator.vibrate(1000);
 						fj.hp--;
 						fj.hps=20;//刷新20次，血量减少1
 						if(dj==djm){//若是小型敌机，则炸毁
