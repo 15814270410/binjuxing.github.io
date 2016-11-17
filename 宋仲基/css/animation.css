@@ -1,0 +1,39 @@
+
+@keyframes yuan {
+	from{transform:translate(.1rem,.1rem) rotate(60deg);}
+	to{transform:translate(.1rem,.1rem) rotate(420deg);}
+}
+@-webkit-keyframes yuan {
+	from{transform:translate(.1rem,.1rem) rotate(60deg);}
+	to{transform:translate(.1rem,.1rem) rotate(420deg);}
+
+}
+@keyframes donghua1 {
+	0%{background-size: 100% 100%;}
+	50%{background-size: 90% 90%;}
+	100%{background-size: 100% 100%;}
+} 
+@-webkit-keyframes donghua1 {
+	0%{background-size: 100% 100%;}
+	50%{background-size: 90% 90%;}
+	100%{background-size: 100% 100%;}
+}
+@keyframes donghua2 {
+	0%{transform: rotate(2deg);}
+	50%{transform: rotate(-2deg);}
+	100%{transform: rotate(2deg);}
+}
+@-webkit-keyframes donghua2 {
+	0%{transform: rotate(2deg);}
+	50%{transform: rotate(-2deg);}
+	100%{transform: rotate(2deg);}
+}
+@keyframes donghua3 {
+	from{top:85%;opacity:1;}
+	to{top:70%;opacity:0;}
+}
+@-webkit-keyframes donghua3 {
+	from{top:85%;opacity:1;}
+	to{top:70%;opacity:0;}
+
+}
