@@ -225,10 +225,10 @@ body{
 }
 .timu div{
 	position: absolute;
-	top:56%;
+	top:56.3%;
 	left:.8rem;
 	width: .19rem;
-	height:3%;
+	height:.19rem;
 	background-size: 100% 100%;
 	background-image: url(../img/xuan.png);
 	display: none;
