@@ -22,6 +22,10 @@
 			change();
 		})
 	})(document.documentElement)
+	window.onload=test();
+	function test(){ 
+	window.ontouchstart = function(event) { event.preventDefault(); };
+	}
 </script>
 </head>
 <body>
