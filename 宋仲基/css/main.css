@@ -27,9 +27,9 @@ body{
 	background: #fdfd1d;
 	border-radius: 50%; 
 	transform-origin:0.5rem 0.5rem;
-	-webkit-transform-origin:0.5rem 0.5rem;
+	transform-origin:0.5rem 0.5rem;
 	transform:translate(.1rem,.1rem) rotate(30deg);
-	animation: yuan 1.2s infinite;
+	-webkit-animation: yuan 1.2s infinite;
 }
 .bfb{
 	position: absolute;
@@ -178,6 +178,7 @@ body{
 	left:2rem;
 	top:85%;
 	background-image:url(../img/p2_shou.png);
+	-webkit-animation: donghua3 1.5s infinite;
 	animation: donghua3 1.5s infinite;
 }
 .jiemian2 p{
