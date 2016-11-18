@@ -41,7 +41,7 @@ for(var i=0;i<arrSrc.length;i++){
 		img.onload = function(){
 			index++;
 			jindu();
-			if(index==arrSrc.length){
+			if(index==arrSrc.length-1){
 				begin();
 			}
 		}
@@ -52,7 +52,7 @@ for(var i=0;i<arrSrc.length;i++){
 		sound.onloadeddata = function(){
 			index++;
 			jindu();
-			if(index==arrSrc.length){
+			if(index==arrSrc.lengt-1){
 				begin();
 			}
 		}
