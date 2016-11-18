@@ -18,13 +18,14 @@ body{
 	background: #d5d7d8;
 	border-radius: 50%;
 	text-align:center;
+	box-shadow:3px 3px 30px white;
 	/*display: none;*/
 }
 .quan{
 	position: absolute;
 	width:.16rem;
 	height:.16rem;
-	background: #fdfd1d;
+	background: #ffffff;
 	border-radius: 50%; 
 	transform-origin:0.5rem 0.5rem;
 	transform-origin:0.5rem 0.5rem;
@@ -33,7 +34,7 @@ body{
 }
 .bfb{
 	position: absolute;
-	color:white;
+	color:#ecacbf;
 	left:.35rem;
 	top: .46rem;
 	font-size: .3rem;
